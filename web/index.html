@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="my_bandar">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <title>my_bandar</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Google Maps JavaScript API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXvPWz80HJWrAd74AH2GRnddfLoXUFHeQ"></script>
+</head>
+
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+  <script>
+    // Helper: geocode address using Maps JS API's built-in Geocoder
+    function geocodeAddressJS(address) {
+      return new Promise(function (resolve) {
+        try {
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ address: address }, function (results, status) {
+            console.log("Geocoder status:", status, "Results:", results);
+            if (status === 'OK' && results.length > 0) {
+              resolve(JSON.stringify({
+                success: true,
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng(),
+                address: results[0].formatted_address
+              }));
+            } else {
+              resolve(JSON.stringify({
+                success: false,
+                error: status
+              }));
+            }
+          });
+        } catch (e) {
+          console.error("Geocoder exception:", e);
+          resolve(JSON.stringify({
+            success: false,
+            error: "EXCEPTION: " + e.message
+          }));
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
