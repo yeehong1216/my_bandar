@@ -76,37 +76,13 @@ class _LoginScreenState extends State<LoginScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Spacer(flex: 3),
-                    // App icon
-                    Container(
-                      width: 88,
-                      height: 88,
-                      decoration: BoxDecoration(
-                        color: AppTheme.primaryBlue,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppTheme.primaryBlue.withValues(alpha: 0.3),
-                            blurRadius: 24,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.location_city_rounded,
-                        color: Colors.white,
-                        size: 44,
-                      ),
+                    // App logo
+                    Image.asset(
+                      'assets/images/mybandar_logo.png',
+                      width: 180,
+                      height: 180,
                     ),
-                    const SizedBox(height: 24),
-                    // App title
-                    Text(
-                      'MyBandar',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(fontSize: 36),
-                    ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     Text(
                       'Your City, Your Voice',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
