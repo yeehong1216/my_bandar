@@ -32,10 +32,11 @@ class _VerifyReportScreenState extends State<VerifyReportScreen> {
 
     final provider = context.read<AppProvider>();
     final address = _args['address'] as String;
+    final description = _args['description'] as String? ?? '';
     const title = 'Civic Report';
 
     setState(() {
-      _aiReport = provider.generateAIReport(title, '', address);
+      _aiReport = provider.generateAIReport(title, description, address);
       _isLoading = false;
     });
   }
@@ -44,11 +45,12 @@ class _VerifyReportScreenState extends State<VerifyReportScreen> {
     final provider = context.read<AppProvider>();
     final address = _args['address'] as String;
     final photoPath = _args['photoPath'] as String?;
+    final description = _args['description'] as String? ?? '';
 
     final report = Report(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: 'Civic Report',
-      description: '',
+      description: description,
       address: address,
       photoPath: photoPath,
       status: 'Pending',

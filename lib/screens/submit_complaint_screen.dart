@@ -16,6 +16,7 @@ class SubmitComplaintScreen extends StatefulWidget {
 
 class _SubmitComplaintScreenState extends State<SubmitComplaintScreen> {
   final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   String? _selectedPhotoPath;
   bool _isFetchingLocation = true;
@@ -291,6 +292,7 @@ class _SubmitComplaintScreenState extends State<SubmitComplaintScreen> {
       arguments: {
         'address': address,
         'photoPath': _selectedPhotoPath,
+        'description': _descriptionController.text.trim(),
       },
     );
   }
@@ -299,6 +301,7 @@ class _SubmitComplaintScreenState extends State<SubmitComplaintScreen> {
   void dispose() {
     _mapController?.dispose();
     _addressController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -403,9 +406,47 @@ class _SubmitComplaintScreenState extends State<SubmitComplaintScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 28),
+                    const SizedBox(height: 20),
 
-                    // Place Section
+                    // ── Description (Optional) Section ──
+                    Text('Description (Optional)',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _descriptionController,
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        hintText:
+                            'Briefly describe the issue (e.g., deep pothole, fallen tree)...',
+                        hintStyle: TextStyle(
+                          color: Colors.grey.shade400,
+                          fontSize: 14,
+                        ),
+                        filled: true,
+                        fillColor: AppTheme.backgroundGrey,
+                        contentPadding: const EdgeInsets.all(16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.grey.shade200),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.grey.shade200),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: AppTheme.primaryBlue, width: 1.5),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // ── Place Section ──
                     Text('Place',
                         style: Theme.of(context).textTheme.titleMedium),
                     const SizedBox(height: 10),
